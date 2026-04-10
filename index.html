@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My GitHub Repositories</title>
+</head>
+<body>
+  <h1>My Public GitHub Repositories</h1>
+  <ul id="repo-list"></ul>
+
+  <script>
+    const username = "naimeba"; // <-- metti il tuo username GitHub
+
+    fetch(`https://api.github.com/users/${username}/repos`)
+      .then(response => response.json())
+      .then(repos => {
+        const list = document.getElementById("repo-list");
+        repos.forEach(repo => {
+          const item = document.createElement("li");
+          item.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>`;
+          list.appendChild(item);
+        });
+      });
+  </script>
+</body>
+</html>
